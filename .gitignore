@@ -1,0 +1,6 @@
+tf.plan
+output.json
+*.tfstate*
+.terraform/
+.terraform.*
+*.tfvars
