@@ -78,8 +78,12 @@ resource "databricks_permissions" "view_all_pipelines" {
   }
 }
 
+
+# Please note, the following snippet should be applied to any registered model you have running.
+# You should add view_all_mlflow_models to any existing registered model resource definition you have.
+
 # ========= Registered Models ==============
-#
+
 # resource "databricks_mlflow_model" "this" {
 #   name = "My MLflow Model"
 #
@@ -104,9 +108,11 @@ resource "databricks_permissions" "view_all_pipelines" {
 #   }
 # }
 
+# Please note, the following snippet should be applied to any serving endpoint you have running.
+# You should add ml_serving_endpoint_usage to any existing serving endpoint resource definition you have.
 
 # ========= Serving Endpoints ==============
-#
+
 # resource "databricks_model_serving" "this" {
 #   name = "ads-serving-endpoint-3"
 #   config {
@@ -129,8 +135,11 @@ resource "databricks_permissions" "view_all_pipelines" {
 #   }
 # }
 
+# Please note, the following snippet should be applied to any connection you have running.
+# You should add connections_usage to any existing connection resource definition you have.
+
 # ============== Connections ===============
-#
+
 # resource "databricks_connection" "mysql" {
 #   name            = "mysql_connection"
 #   connection_type = "MYSQL"
@@ -146,7 +155,7 @@ resource "databricks_permissions" "view_all_pipelines" {
 #   }
 # }
 #
-# resource "databricks_grants" "some" {
+# resource "databricks_grants" "connections_usage" {
 #   foreign_connection = databricks_connection.mysql.name
 #   grant {
 #     principal  = databricks_service_principal.nomasec_sa.application_id
@@ -154,8 +163,11 @@ resource "databricks_permissions" "view_all_pipelines" {
 #   }
 # }
 
+# Please note, the following snippet should be applied to any external location you have running.
+# You should add external_locations_usage to any existing external location resource definition you have.
+
 # ============= External Locations ============
-#
+
 # resource "databricks_external_location" "some" {
 #   name            = "external"
 #   url             = "s3://${aws_s3_bucket.external.id}/some"
@@ -163,7 +175,7 @@ resource "databricks_permissions" "view_all_pipelines" {
 #   comment         = "Managed by TF"
 # }
 #
-# resource "databricks_grants" "some" {
+# resource "databricks_grants" "external_locations_usage" {
 #   external_location = databricks_external_location.some.id
 #   grant {
 #     principal  = databricks_service_principal.nomasec_sa.application_id
@@ -171,15 +183,18 @@ resource "databricks_permissions" "view_all_pipelines" {
 #   }
 # }
 
+# Please note, the following snippet should be applied to any unity catalog registered model you have running.
+# You should add registered_model_usage to any existing registered model resource definition you have.
+
 # ====== Unity Catalog - Registered Model =======
-#
+
 # resource "databricks_registered_model" "this" {
 #   name         = "my_model"
 #   catalog_name = "main"
 #   schema_name  = "default"
 # }
 #
-# resource "databricks_grants" "customers" {
+# resource "databricks_grants" "registered_model_usage" {
 #   model = databricks_registered_model.full_name
 #   grant {
 #     principal  = databricks_service_principal.nomasec_sa.application_id
