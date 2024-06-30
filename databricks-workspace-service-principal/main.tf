@@ -37,43 +37,43 @@ resource "databricks_permissions" "root_permission" {
 }
 
 # ========= Jobs ==========
-
-data "databricks_jobs" "this" {}
-
-resource "databricks_permissions" "view_all_jobs" {
-  for_each = data.databricks_jobs.this.ids
-  job_id   = each.value
-
-  access_control {
-    service_principal_name = databricks_service_principal.nomasec_sa.application_id
-    permission_level       = "CAN_VIEW"
-  }
-}
-
+#
+# data "databricks_jobs" "this" {}
+#
+# resource "databricks_permissions" "view_all_jobs" {
+#   for_each = data.databricks_jobs.this.ids
+#   job_id   = each.value
+#
+#   access_control {
+#     service_principal_name = databricks_service_principal.nomasec_sa.application_id
+#     permission_level       = "CAN_VIEW"
+#   }
+# }
+#
 # ========= Clusters ==========
-
-data "databricks_clusters" "this" {}
-
-resource "databricks_permissions" "view_all_clusters" {
-  for_each = toset(data.databricks_clusters.this.ids)
-  cluster_id = each.value
-
-  access_control {
-    service_principal_name = databricks_service_principal.nomasec_sa.application_id
-    permission_level       = "CAN_ATTACH_TO"
-  }
-}
-
+#
+# data "databricks_clusters" "this" {}
+#
+# resource "databricks_permissions" "view_all_clusters" {
+#   for_each = toset(data.databricks_clusters.this.ids)
+#   cluster_id = each.value
+#
+#   access_control {
+#     service_principal_name = databricks_service_principal.nomasec_sa.application_id
+#     permission_level       = "CAN_ATTACH_TO"
+#   }
+# }
+#
 # ========= Pipelines ==========
-
-data "databricks_pipelines" "this" {}
-
-resource "databricks_permissions" "view_all_pipelines" {
-  for_each = toset(data.databricks_pipelines.this.ids)
-  pipeline_id = each.value
-
-  access_control {
-    service_principal_name = databricks_service_principal.nomasec_sa.application_id
-    permission_level       = "CAN_VIEW"
-  }
-}
+#
+# data "databricks_pipelines" "this" {}
+#
+# resource "databricks_permissions" "view_all_pipelines" {
+#   for_each = toset(data.databricks_pipelines.this.ids)
+#   pipeline_id = each.value
+#
+#   access_control {
+#     service_principal_name = databricks_service_principal.nomasec_sa.application_id
+#     permission_level       = "CAN_VIEW"
+#   }
+# }
